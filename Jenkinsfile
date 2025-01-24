@@ -3,7 +3,10 @@ pipeline {
     stages {
         stage('Build') {
             agent {
-                docker { image 'maven:3.9.9-eclipse-temurin-21-alpine' }
+                docker {
+                    image 'maven:3.9.9-eclipse-temurin-21-alpine'
+                    args '-u root'
+                }
             }
             steps {
                 checkout scm
@@ -12,7 +15,10 @@ pipeline {
         }
         stage('Test') {
             agent {
-                docker { image 'node:22.13.1-alpine3.21' }
+                docker {
+                    image 'node:22.13.1-alpine3.21'
+                    args '-u root'
+                }
             }
             steps {
                 checkout scm
